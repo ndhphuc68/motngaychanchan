@@ -9,8 +9,10 @@ import { toastSuccess } from "@/utils/toast";
 import { useDispatch } from "react-redux";
 import { authStore } from "@/stores/modules/auth";
 import { saveCookies } from "@/utils/cookies";
+import { useReCaptcha } from "next-recaptcha-v3";
 
 export default function LoginPage() {
+  const { executeRecaptcha } = useReCaptcha();
   const dispatch = useDispatch();
 
   const [dataLogin, setDataLogin] = useState<LoginModel>({
@@ -20,16 +22,18 @@ export default function LoginPage() {
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    const res: ApiResponse = await loginApi(dataLogin);
-    if (res.success) {
-      dispatch(authStore.actions.getTokenUser(res.data.token));
-      await saveCookies("token", res.data.token);
-      toastSuccess("Login Success !");
-    }
+    const token = await executeRecaptcha("form_submit");
+    console.log(token);
+    // const res: ApiResponse = await loginApi(dataLogin);
+    // if (res.success) {
+    //   dispatch(authStore.actions.getTokenUser(res.data.token));
+    //   await saveCookies("token", res.data.token);
+    //   toastSuccess("Login Success !");
+    // }
   };
 
   return (
-    <L.LoginMain className="flex justify-center items-center">
+    <L.LoginMain>
       <form
         onSubmit={handleLogin}
         className="shadow-xl rounded-xl w-96 space-y-4 bg-white py-14 px-10"
@@ -40,7 +44,7 @@ export default function LoginPage() {
             alt="logo"
           />
           <h2 className="text-center text-2xl font-bold mt-6 leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Login to your account
           </h2>
         </div>
         <div>

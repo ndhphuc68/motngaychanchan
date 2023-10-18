@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 const inter = Exo({ subsets: ["latin"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            <NextUIProvider>{children}</NextUIProvider>
+            <ReCaptchaProvider reCaptchaKey="6LcEua4oAAAAAImkSG4MNL-CSZcYHK_tVah0slBO">
+              <NextUIProvider>{children}</NextUIProvider>
+            </ReCaptchaProvider>
           </QueryClientProvider>
         </Provider>
         <ToastContainer
