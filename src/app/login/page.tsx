@@ -1,10 +1,31 @@
 "use client";
+
 import * as L from "@/app/login/styles";
 import { Image } from "@nextui-org/react";
+import { loginApi } from "@/api/modules/auth";
+import { useState } from "react";
+import { ApiResponse, LoginModel } from "@/models";
+import { toastSuccess } from "@/utils/toast";
+import { useDispatch } from "react-redux";
+import { authStore } from "@/stores/modules/auth";
+import { saveCookies } from "@/utils/cookies";
 
 export default function LoginPage() {
-  const handleLogin = (e: any) => {
+  const dispatch = useDispatch();
+
+  const [dataLogin, setDataLogin] = useState<LoginModel>({
+    username: "",
+    password: "",
+  });
+
+  const handleLogin = async (e: any) => {
     e.preventDefault();
+    const res: ApiResponse = await loginApi(dataLogin);
+    if (res.success) {
+      dispatch(authStore.actions.getTokenUser(res.data.token));
+      await saveCookies("token", res.data.token);
+      toastSuccess("Login Success !");
+    }
   };
 
   return (
@@ -26,6 +47,13 @@ export default function LoginPage() {
           <label>User Name</label>
           <div className="mt-2">
             <input
+              value={dataLogin.username}
+              onChange={(e) =>
+                setDataLogin({
+                  ...dataLogin,
+                  username: e.target.value,
+                })
+              }
               type="text"
               className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 h-9 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6"
             />
@@ -35,6 +63,13 @@ export default function LoginPage() {
           <label>Password</label>
           <div className="mt-2">
             <input
+              value={dataLogin.password}
+              onChange={(e) =>
+                setDataLogin({
+                  ...dataLogin,
+                  password: e.target.value,
+                })
+              }
               type="password"
               className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 h-9 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6"
             />

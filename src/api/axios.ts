@@ -10,8 +10,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
-  const { cookies } = await import("next/headers"),
-    token = cookies().get("token")?.value;
+  const token = localStorage.getItem("token");
 
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
