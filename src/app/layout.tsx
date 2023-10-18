@@ -1,6 +1,6 @@
 "use client";
 
-import { Inter } from "next/font/google";
+import { Exo } from "next/font/google";
 import "./globals.css";
 
 import { NextUIProvider } from "@nextui-org/react";
@@ -12,7 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import React from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Exo({ subsets: ["latin"] });
 
 const queryClient = new QueryClient();
 
