@@ -5,14 +5,13 @@ import { Image } from "@nextui-org/react";
 export default function LoginPage() {
   const handleLogin = (e: any) => {
     e.preventDefault();
-    console.log(1232323);
   };
 
   return (
     <L.LoginMain className="flex justify-center items-center">
       <form
         onSubmit={handleLogin}
-        className="w-96 space-y-4 bg-white py-14 px-10"
+        className="shadow-xl rounded-xl w-96 space-y-4 bg-white py-14 px-10"
       >
         <div className="flex flex-col justify-center items-center">
           <Image
