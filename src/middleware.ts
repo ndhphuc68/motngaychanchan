@@ -9,7 +9,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
   if (!token && !request.nextUrl.pathname.startsWith("/login")) {
-    console.log(12323);
     return NextResponse.redirect(new URL("/login", request.url));
   }
 }
