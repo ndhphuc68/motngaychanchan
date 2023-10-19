@@ -22,14 +22,13 @@ export default function LoginPage() {
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    const token = await executeRecaptcha("form_submit");
-    console.log(token);
-    // const res: ApiResponse = await loginApi(dataLogin);
-    // if (res.success) {
-    //   dispatch(authStore.actions.getTokenUser(res.data.token));
-    //   await saveCookies("token", res.data.token);
-    //   toastSuccess("Login Success !");
-    // }
+
+    const res: ApiResponse = await loginApi(dataLogin);
+    if (res.success) {
+      dispatch(authStore.actions.getTokenUser(res.data.token));
+      await saveCookies("token", res.data.token);
+      toastSuccess("Login Success !");
+    }
   };
 
   return (

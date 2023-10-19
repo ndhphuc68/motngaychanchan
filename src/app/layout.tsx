@@ -25,9 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            <ReCaptchaProvider reCaptchaKey="6LcEua4oAAAAAImkSG4MNL-CSZcYHK_tVah0slBO">
-              <NextUIProvider>{children}</NextUIProvider>
-            </ReCaptchaProvider>
+            <NextUIProvider>{children}</NextUIProvider>
           </QueryClientProvider>
         </Provider>
         <ToastContainer
