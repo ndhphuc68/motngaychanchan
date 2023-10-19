@@ -1,7 +1,23 @@
+"use client";
+
 import { LoginMain } from "@/app/login/styles";
 import { Image } from "@nextui-org/react";
+import { useState } from "react";
+import { RegisterModel } from "@/models";
 
 export default function Register() {
+  const [dataCreate, setDataCreate] = useState<RegisterModel>({
+    username: "",
+    password: "",
+    phone: "",
+    email: "",
+    name: "",
+  });
+
+  const handleSignUp = (e: any) => {
+    e.preventDefault();
+  };
+
   return (
     <LoginMain>
       <div className="flex bg-white shadow-2xl rounded-xl p-10">
@@ -13,7 +29,7 @@ export default function Register() {
           />
         </div>
         <div className="flex-1">
-          <form className="space-y-5">
+          <form onSubmit={handleSignUp} className="space-y-5">
             <h2>Register Account</h2>
             <div>
               <label>User Name</label>
@@ -25,7 +41,7 @@ export default function Register() {
               </div>
             </div>
             <div>
-              <label>User Name</label>
+              <label>Name</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -34,7 +50,7 @@ export default function Register() {
               </div>
             </div>
             <div>
-              <label>User Name</label>
+              <label>Password</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -43,7 +59,7 @@ export default function Register() {
               </div>
             </div>
             <div>
-              <label>User Name</label>
+              <label>Confirm Password</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -52,7 +68,16 @@ export default function Register() {
               </div>
             </div>
             <div>
-              <label>User Name</label>
+              <label>Email</label>
+              <div className="mt-2">
+                <input
+                  type="email"
+                  className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 h-9 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label>Phone</label>
               <div className="mt-2">
                 <input
                   type="text"

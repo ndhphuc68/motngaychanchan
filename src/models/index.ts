@@ -3,6 +3,12 @@ export interface LoginModel {
   password: string;
 }
 
+export interface RegisterModel extends LoginModel {
+  name: string;
+  email: string;
+  phone: string;
+}
+
 export interface ApiResponse {
   success: boolean;
   message: string;

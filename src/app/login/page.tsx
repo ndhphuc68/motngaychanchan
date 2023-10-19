@@ -9,10 +9,9 @@ import { toastSuccess } from "@/utils/toast";
 import { useDispatch } from "react-redux";
 import { authStore } from "@/stores/modules/auth";
 import { saveCookies } from "@/utils/cookies";
-import { useReCaptcha } from "next-recaptcha-v3";
+import Link from "next/link";
 
 export default function LoginPage() {
-  const { executeRecaptcha } = useReCaptcha();
   const dispatch = useDispatch();
 
   const [dataLogin, setDataLogin] = useState<LoginModel>({
@@ -85,6 +84,16 @@ export default function LoginPage() {
           >
             Login
           </button>
+        </div>
+        <div className="flex justify-center">
+          <Link
+            className="text-sm font-bold"
+            href={{
+              pathname: "/register",
+            }}
+          >
+            Register
+          </Link>
         </div>
       </form>
     </L.LoginMain>
